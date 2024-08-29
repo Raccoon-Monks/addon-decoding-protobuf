@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package app_analytics;
+
+message Bundle {
+    message Event {
+
+        string name = 2;
+        
+        message EventParameter {
+            message Parameter {
+                message ItemParameter {
+                string name = 1;
+                string string_value = 2;
+                int64 int_value = 3;
+                fixed64 double_value = 5;
+                }
+
+                repeated ItemParameter parameter = 6;
+            }
+
+            string name = 1;
+            string string_value = 2;
+            int64 int_value = 3;
+            fixed64 double_value = 5;
+            repeated Parameter parameter = 6;
+        }
+
+        repeated EventParameter parameter = 1;
+
+        int64 timestamp_millis = 3;
+        int64 previous_timestamp_millis = 4;
+    }
+    repeated Event event = 2;
+
+    message UserProperty {
+        int64 set_timestamp_millis = 1;
+        string name = 2;
+        string string_value = 3;
+        int64 int_value = 4;
+    }
+
+    repeated UserProperty user_property = 3;
+
+    int32 protocol_version = 1;
+    int64 upload_timestamp_millis = 4;
+    int64 start_timestamp_millis = 5;
+    int64 end_timestamp_millis = 6;
+    int64 previous_bundle_end_timestamp_millis = 7;
+    string platform = 8;
+    string os_version = 9;
+    string device_model = 10;
+    string user_default_language = 11;
+    int32 time_zone_offset_minutes = 12;
+    string app_store = 13;
+    string app_id = 14;
+    string app_version = 16;
+    int32 gmp_version = 17;
+    int32 uploading_gmp_version = 18;
+    string resettable_device_id = 19;
+    string user_pseudo_id = 21;
+    int64 dev_cert_hash = 22;
+    int32 bundle_sequential_index = 23;
+    string gmp_app_id = 25;
+    int64 previous_bundle_start_timestamp_millis = 26;
+    string firebase_instance_id = 30;
+    int32 app_version_major = 31;
+    int64 config_version = 35;
+    int32 target_os_version = 34;
+    string consent_signals = 52;
+    string consent_diagnostics = 71;
+}
+
+message Batch {
+    repeated Bundle bundle = 1;
+}
