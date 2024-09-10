@@ -34,20 +34,25 @@ class MitmproxyUtils:
             str: enhanced string representing the request data.
         """
         # events
-        events = {"_cmp": "firebase_campaign", "_s": "session_start", "_vs": "screen_view",
-                  "_e": "user_engagement", "_cd": "app_clear_data", "_ui": "app_remove", "_f": "first_open"
+        events = {"_cmp": "firebase_campaign(_cmp)", "_s": "session_start(_s)", "_vs": "screen_view(_vs)",
+                  "_e": "user_engagement(_e)", "_cd": "app_clear_data(_cd)", "_ui": "app_remove(_ui)",
+                  "_f": "first_open(_f)", "_nr": "notification_receive(_nr)", "_no": "notification_open(_no)",
+                  "_nf": "notification_foreground(_nf)"
                   }
         # parameters
-        parameters = {"_o": "firebase_event_origin", "_sc": "firebase_screen_class", "_pc": "ga_previous_class", "_pi": "ga_previous_id",
-                      "_pn": "ga_previous_screen", "_sn": "firebase_screen", "_si": "firebase_screen_id", "_cis": "campaign_info_source",
-                      "_c": "ga_conversion", "_mst": "manual_tracking", "_et": "engagement_time_msec", "_dbg": "debug_event",
-                      "_pfo": "previous_first_open_count", "_sys": "system_app", "_uwa": "update_with_analytics", "_sysu": "system_app_update"
+        parameters = {"_o": "firebase_event_origin(_o)", "_sc": "firebase_screen_class(_sc)", "_pc": "ga_previous_class(_pc)", "_pi": "ga_previous_id(_pi)",
+                      "_pn": "ga_previous_screen(_pn)", "_sn": "firebase_screen(_sn)", "_si": "firebase_screen_id(_si)", "_cis": "campaign_info_source(_cis)",
+                      "_c": "ga_conversion(_c)", "_mst": "manual_tracking(_mst)", "_et": "engagement_time_msec(_et)", "_dbg": "debug_event(_dbg)",
+                      "_pfo": "previous_first_open_count(_pfo)", "_sys": "system_app(_sys)", "_uwa": "update_with_analytics(_uwa)",
+                      "_sysu": "system_app_update(_sysu)", "_ndt": "message_device_time(_ndt)", "_nmc": "message_type(_nmc)",
+                      "_nmn": "message_name(_nmn)", "_nmt": "message_time(_nmt)", "_nmid": "message_id(_nmid)"
                       }
         # user property
-        user_property = {"_fot" : "first_open_time", "_fi": "first_open_after_install", "_sno": "ga_session_number",
-                         "_sid": "ga_session_id", "_lte": "lifetime_user_engagement", "_se": "session_user_engagement",
-                         "_id" : "user_id", "_npa" : "non_personalized_ads"
+        user_property = {"_fot" : "first_open_time(_fot)", "_fi": "first_open_after_install(_fi)", "_sno": "ga_session_number(_sno)",
+                         "_sid": "ga_session_id(_sid)", "_lte": "lifetime_user_engagement(_lte)", "_se": "session_user_engagement(_se)",
+                         "_id" : "user_id(_id)", "_npa" : "non_personalized_ads(_npa)"
                          }
+        
         for name, value in events.items():
             log = re.sub(f"\"{name}\"", f"\"{value}\"", log)
         for name, value in parameters.items():
