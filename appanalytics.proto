@@ -5,7 +5,7 @@ package app_analytics;
 message Bundle {
     message Event {
 
-        string name = 2;
+        string event_name = 2;
         
         message EventParameter {
             message Parameter {

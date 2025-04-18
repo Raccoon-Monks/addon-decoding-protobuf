@@ -1,16 +1,17 @@
 
 # Addon (mitmproxy): Protobuf decoder for Google Analytics 4
 
-### Feature: decodificar o binário protobuf enviado numa request para o endpoint do Google Analtyics 4.
+### Feature: decodificar os dados em formato binário presentes em requests do Google Analytics 4 (GA4) realizadas pelo serviço de analytics do Firebase SDK. O Firebase Analytics utiliza o Protocol Buffers para realizar o encode dos dados.
 
 ![Decoding Protobuf](https://drive.google.com/uc?id=1P6Flic105VVGMGPnLuvfF0jFLzDsvNGT)
 
 ---
 
+
 ## Dependências:
-- [Protocol Buffer Compiler v27.2+](https://grpc.io/docs/protoc-installation/)
 - [mitmproxy](https://mitmproxy.org/)
-- [python 3.12](https://www.python.org/)
+- [python 3.13](https://www.python.org/)
+
 
 ## Instalação:
 Todos os comandos a seguir devem ser executados na raiz do projeto.
@@ -28,6 +29,11 @@ Em seguida, ative o ambiente virtual com o comando:
 Com o ambiente virtual ativo, instale as dependências com o comando:
 
 > `pip install -r requirements.txt`
+
+Após instalado todas as dependências, desative e ative novamente o ambiente virtual. É necessário apenas para que as dependências funcionem nos imports do script. Utilize comandos em sequência:
+> `deactivate`
+> `source venv/bin/activate`
+
 
 ## Como utilizar:
 
@@ -50,13 +56,13 @@ Execute um dos comandos abaixo de acordo com o front-end de sua preferência:
 ---
 
 ### Protocol Buffer Compiler [Optional]:
-Faça este procedimento caso queira inserir ou atualizar campos para decode em *appanalytics.proto*.
+Não é necessário compilar o arquivo .proto que contém as definições de serviços e messagens.
+Mas caso queria compilar o arquivo .proto para atualizar os serviçoes e messagens, utilize o protocol buffer compile (protoc).
 
-Após editar/atualizar o arquivo *appanalytics.proto*, exclua o arquivo *appanalytics_pb2.py*.
+Acesse a página do [Protocol Buffer Compiler](https://protobuf.dev/installation/) e siga as orientações para baixar a versão mais recente.
 
-Acesse a página do [Protocol Buffer Compiler](https://grpc.io/docs/protoc-installation/) e siga as orientações para baixar a versâo mais recente, a partir da v27.2.
-
-Após instalado, execute o seguinte comando:
+Após instalar o protoc e editar/atualizar o arquivo *appanalytics.proto*, exclua o arquivo *appanalytics_pb2.py*.
+Execute o seguinte comando para compilar:
 
 > `protoc --python_out=. appanalytics.proto`
 
