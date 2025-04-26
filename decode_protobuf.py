@@ -10,8 +10,8 @@ import re
 
 @dataclass
 class MitmproxyUtils:
-    ENDPOINT_ANDROID: str
-    ENDPOINT_IOS: str
+    ENDPOINT_ANDROID_RE: str
+    ENDPOINT_IOS_RE: str
     VIEW_NAME: str
     VIEW_DESCRIPTION: str
     TAG: str
@@ -64,8 +64,8 @@ class MitmproxyUtils:
 
 
 proxy_utils = MitmproxyUtils(
-    ENDPOINT_ANDROID='app-measurement.com/a',
-    ENDPOINT_IOS='app-analytics-services-att.com/a',
+    ENDPOINT_ANDROID_RE=r".*app-measurement.com\/a",
+    ENDPOINT_IOS_RE=r"^https:\/\/app-analytics-services(-att)?.com\/a",
     VIEW_NAME="protobuf to GA4",
     VIEW_DESCRIPTION="protobuf decoded to GA4",
     TAG="APP_TRACKING"
@@ -86,7 +86,8 @@ class ViewProtobuf(contentviews.View):
     ) -> contentviews.TViewResult:
         url = flow.request.url
         try:
-            if (proxy_utils.ENDPOINT_ANDROID in url) or (proxy_utils.ENDPOINT_IOS in url):
+            if re.search(proxy_utils.ENDPOINT_ANDROID_RE, url) or re.search(proxy_utils.ENDPOINT_IOS_RE, url):
+                logging.info(f"url match: ${url}")
                 batch = appanalytics_pb2.Batch()
                 batch.ParseFromString(data)
                 data_string = repr(batch)
@@ -106,7 +107,7 @@ class ViewProtobuf(contentviews.View):
         **unknown_metadata,
     ) -> float:
         url = flow.request.url
-        if (proxy_utils.ENDPOINT_ANDROID in url) or (proxy_utils.ENDPOINT_IOS in url):
+        if re.search(proxy_utils.ENDPOINT_ANDROID_RE, url) or re.search(proxy_utils.ENDPOINT_IOS_RE, url):
             return 1
         else:
             return 0
@@ -125,5 +126,5 @@ def done():
 
 def request(flow):
     url = str(flow.request.url)
-    if (proxy_utils.ENDPOINT_ANDROID in url) or (proxy_utils.ENDPOINT_IOS in url):
+    if re.search(proxy_utils.ENDPOINT_ANDROID_RE, url) or re.search(proxy_utils.ENDPOINT_IOS_RE, url):
         logging.info(f"{proxy_utils._info_request_GA4} {url}")
