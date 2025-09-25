@@ -45,7 +45,7 @@ class MitmproxyUtils:
                       "_c": "ga_conversion(_c)", "_mst": "manual_tracking(_mst)", "_et": "engagement_time_msec(_et)", "_dbg": "debug_event(_dbg)",
                       "_pfo": "previous_first_open_count(_pfo)", "_sys": "system_app(_sys)", "_uwa": "update_with_analytics(_uwa)",
                       "_sysu": "system_app_update(_sysu)", "_ndt": "message_device_time(_ndt)", "_nmc": "message_type(_nmc)",
-                      "_nmn": "message_name(_nmn)", "_nmt": "message_time(_nmt)", "_nmid": "message_id(_nmid)"
+                      "_nmn": "message_name(_nmn)", "_nmt": "message_time(_nmt)", "_nmid": "message_id(_nmid)", "_r": "ga_realtime (_r)"
                       }
         # user property
         user_property = {"_fot" : "first_open_time(_fot)", "_fi": "first_open_after_install(_fi)", "_sno": "ga_session_number(_sno)",
