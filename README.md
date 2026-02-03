@@ -30,10 +30,11 @@ Com o ambiente virtual ativo, instale as dependências com o comando:
 
 > `pip install -r requirements.txt`
 
-Após instalado todas as dependências, desative e ative novamente o ambiente virtual. É necessário apenas para que as dependências funcionem nos imports do script. Utilize comandos em sequência:
-> `deactivate`
-> `source venv/bin/activate`
-
+Após instalado todas as dependências, desative e ative novamente o ambiente virtual. É necessário apenas para que as dependências funcionem nos imports do script.
+```bash
+deactivate
+source venv/bin/activate
+```
 
 ## Como utilizar:
 
